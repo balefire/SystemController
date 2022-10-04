@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SysController 1.5</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="main_0">SysController Monitor</string>
+    <string name="main_1">Setting for Host ID to 1</string>
+
+    <string name="controllor_0">清除</string>
+    <string name="controllor_1">成绩</string>
+    <string name="controllor_2">等待</string>
+    <string name="controllor_3">上升</string>
+    <string name="controllor_4">到顶</string>
+    <string name="controllor_5">下降</string>
+    <string name="controllor_6">暂停</string>
+    <string name="controllor_7">到底</string>
+
+    <string name="setting_0">0</string>
+    <string name="setting_1">1</string>
+
+</resources>

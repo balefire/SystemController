@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdk 30
+//    buildToolsVersion '30.0.0'
+
+    defaultConfig {
+        applicationId "com.controlapp.SystemController"
+        minSdkVersion 17
+        targetSdkVersion 30
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+//            abiFilters "armeabi","x86","x86_64","arm64-v8a"
+            abiFilter "armeabi"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    ndkVersion '25.1.8937393'
+//    splits{
+//        abi{
+//            enable true
+//            reset()
+//            include "armeabi","x86","x86_64","arm64-v8a"
+//            universalApk true
+//        }
+//    }
+//    sourceSets {
+//        main {
+//            jniLibs.srcDirs = ['libs']//这个必须加，因为我们把.so文件放在了libs文件夹中
+//        }
+//    }
+}
+
+dependencies {
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0'
+    implementation 'android.arch.navigation:navigation-ui:1.0.0'
+}
