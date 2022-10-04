@@ -4,7 +4,7 @@ public interface IControl {
     String sAddress = "/dev/ttyS0";   //Serial Port
     int iCMDDelay = 4;                //Command delay time MS
     int iBaudRate = 115200;           //Baud-rate
-    boolean bUseMonitor = true;      //Used internal monitor for test
+    boolean bUseMonitorApp = true;      //Used internal monitor for test
 
     int GRADE_TYPE_0 = 0; //Rise and fall
     int GRADE_TYPE_1 = 1; //Firefighting
@@ -16,5 +16,5 @@ public interface IControl {
     String CFG_FILE_NAME = "Setting";
 
     String getGrade(int type);
-    void testForUDPCmd(int iCMD);
+    void testForUDPClient(int iCMD);
 }

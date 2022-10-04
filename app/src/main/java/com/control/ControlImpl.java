@@ -73,7 +73,7 @@ public final class ControlImpl implements IControl {
             Log.e(TAG, "Init Serial ERROR: InvalidParameterException");
         }
 
-        if(bUseMonitor){
+        if(bUseMonitorApp){
             mhandler = ControlApp.getInstance().getHandler();
         }
 
@@ -366,7 +366,7 @@ public final class ControlImpl implements IControl {
         return true;
     }
 
-    public void testForUDPCmd(int iCMD) {
+    public void testForUDPClient(int iCMD) {
         _doStatusCMD(iCMD);
     }
 }

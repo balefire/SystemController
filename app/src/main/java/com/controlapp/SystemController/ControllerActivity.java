@@ -82,22 +82,22 @@ public class ControllerActivity extends AppCompatActivity implements OnClickList
                 CR.getGrade(IControl.GRADE_TYPE_1);
                 break;
             case R.id.btn2:
-                CR.testForUDPCmd(0);
+                CR.testForUDPClient(0);
                 break;
             case R.id.btn3:
-                CR.testForUDPCmd(1);
+                CR.testForUDPClient(1);
                 break;
             case R.id.btn4:
-                CR.testForUDPCmd(2);
+                CR.testForUDPClient(2);
                 break;
             case R.id.btn5:
-                CR.testForUDPCmd(4);
+                CR.testForUDPClient(4);
                 break;
             case R.id.btn6:
-                CR.testForUDPCmd(3);
+                CR.testForUDPClient(3);
                 break;
             case R.id.btn7:
-                CR.testForUDPCmd(5);
+                CR.testForUDPClient(5);
                 break;
             default:
                 break;
