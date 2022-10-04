@@ -16,5 +16,7 @@ public interface IControl {
     String CFG_FILE_NAME = "Setting";
 
     String getGrade(int type);
+
+    //Just for test UDP client commands.
     void testForUDPClient(int iCMD);
 }
