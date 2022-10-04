@@ -1,6 +1,5 @@
 package com.control;
 
-import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -13,7 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.SocketException;
 import java.security.InvalidParameterException;
 import java.util.Arrays;
 
@@ -75,7 +73,7 @@ public final class ControlImpl implements IControl {
             Log.e(TAG, "Init Serial ERROR: InvalidParameterException");
         }
 
-        if(iUsedMonitor){
+        if(bUseMonitor){
             mhandler = ControlApp.getInstance().getHandler();
         }
 
@@ -368,7 +366,7 @@ public final class ControlImpl implements IControl {
         return true;
     }
 
-    public void TestForUDPCmd(int iCMD) {
+    public void testForUDPCmd(int iCMD) {
         _doStatusCMD(iCMD);
     }
 }

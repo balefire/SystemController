@@ -12,7 +12,6 @@ import android.text.Layout;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.control.ControlImpl;
@@ -83,22 +82,22 @@ public class ControllerActivity extends AppCompatActivity implements OnClickList
                 CR.getGrade(IControl.GRADE_TYPE_1);
                 break;
             case R.id.btn2:
-                CR.TestForUDPCmd(0);
+                CR.testForUDPCmd(0);
                 break;
             case R.id.btn3:
-                CR.TestForUDPCmd(1);
+                CR.testForUDPCmd(1);
                 break;
             case R.id.btn4:
-                CR.TestForUDPCmd(2);
+                CR.testForUDPCmd(2);
                 break;
             case R.id.btn5:
-                CR.TestForUDPCmd(4);
+                CR.testForUDPCmd(4);
                 break;
             case R.id.btn6:
-                CR.TestForUDPCmd(3);
+                CR.testForUDPCmd(3);
                 break;
             case R.id.btn7:
-                CR.TestForUDPCmd(5);
+                CR.testForUDPCmd(5);
                 break;
             default:
                 break;

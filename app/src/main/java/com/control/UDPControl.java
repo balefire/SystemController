@@ -77,7 +77,7 @@ public final class UDPControl {
 
     private UDPControl() {
 
-        if(IControl.iUsedMonitor){
+        if(IControl.bUseMonitor){
             mHandler = ControlApp.getInstance().getHandler();
         }
 
