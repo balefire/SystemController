@@ -86,7 +86,7 @@ public final class UDPControl {
                 socket = new DatagramSocket(DEFAULT_HOST_PORT);
             }
 
-            Log.v(TAG, "Host Socket IP : [ " + socket.getLocalAddress().getHostName() + " ]");
+            Log.v(TAG, "Socket IP : [ " + socket.getLocalAddress().getHostName() + " ]");
 
             sLocal_IP = _getIpAdd();
             Log.v(TAG, "Local IP : [ " + sLocal_IP + " ]");
@@ -109,8 +109,6 @@ public final class UDPControl {
             m.obj = info;
             m.sendToTarget();
         }
-
-        return;
     }
 
     private String _getIpAdd() throws SocketException, UnknownHostException{
@@ -141,7 +139,7 @@ public final class UDPControl {
         new Thread(new Runnable() {
             public void run() {
 
-                if(true){ //Test new function for get local ip.
+                if(IControl.bTestNewGetIpMethod){ //Test new function for get local ip.
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         try {
                             _notifyUI("[[TFN]] HostIP : < " + IpUtils.getLocalIp4Address().get().getHostAddress() + " >");

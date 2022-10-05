@@ -91,8 +91,6 @@ public final class ControlImpl implements IControl {
         _notifyUI("[[STATUS CHANGE]] " + strStatusInfo[iStatus] + " -> " + strStatusInfo[iNewStatus]);
 
         iStatus = iNewStatus;
-
-        return;
     }
 
     private void _notifyUI(String info){
@@ -102,11 +100,9 @@ public final class ControlImpl implements IControl {
             m.obj = info;
             m.sendToTarget();
         }
-
-        return;
     }
 
-    private int _getStatus(){
+    private int _getStatus() {
         return iStatus;
     }
 
@@ -184,7 +180,7 @@ public final class ControlImpl implements IControl {
             Log.i(TAG, "REV LOOP SIZE:[ " + size + " ]");
 
             if (size > 0) {
-                Log.i(TAG, "REV COUNT[ " +count + " ] SIZE[ " + size + " ]:[ " + HexConverUtils.bytesToHex(buffer, 0, size) + " ]");
+                Log.i(TAG, "REV COUNT[ " +count + " ] SIZE[ " + size + " ][ " + HexConverUtils.bytesToHex(buffer, 0, size) + " ]");
                 System.arraycopy(buffer,0, result, count, size);
                 count += size;
             }
@@ -198,12 +194,11 @@ public final class ControlImpl implements IControl {
         return result;
     }
 
-    //打开串口
     private SerialPort getSerialPort() throws SecurityException, IOException,
             InvalidParameterException {
-        Log.i(TAG, "Open Serial Port TTY-Name: [ " + sAddress + " ] Baud-Rate:[ " + iBaudRate + " ]");
+
         File file = new File(sAddress);
-        Log.i(TAG, "Open Serial file: [ " + file.toString() + " ]");
+        Log.i(TAG, "Open Serial[ " + sAddress + " ][ " + iBaudRate + " ][ " + file.toString() + " ]");
 
         if(!file.canRead() || !file.canWrite()) {
             Log.e(TAG, "Open Serial file FAIL !!!");
@@ -213,7 +208,33 @@ public final class ControlImpl implements IControl {
         return mSerialPort;
     }
 
-    //关闭串口
+    public String getGrade(int iGradeType)
+    {
+        if(iGradeType < GRADE_TYPE_MIN || iGradeType > GRADE_TYPE_MAX)
+        {
+            Log.e(TAG, "Grade-Type ERROR !!! < " + iGradeType + " >");
+            return null;
+        }
+
+        byte[] data = GD.GetGrade(iGradeType);
+
+        if(null != data)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < data.length; i++) {
+                sb.append("" + data[i]);
+            }
+            Log.v(TAG, "getGrade [ " + sb.toString() + " ]");
+            _notifyUI("[[GRADE]][ " + iGradeType + " ][ " + sb.toString() + " ]");
+            return sb.toString();
+        }
+        else{
+            Log.e(TAG, "getGrade [ null ]");
+            _notifyUI("[[GRADE]][ " + iGradeType + " ][ NULL ]");
+            return null;
+        }
+    }
+
     private void closeSerialPort() {
         Log.i(TAG, "Close Serial Port.");
         try {
@@ -231,35 +252,11 @@ public final class ControlImpl implements IControl {
         }
     }
 
-    public String getGrade(int type)
-    {
-        if(type < GRADE_TYPE_MIN || type > GRADE_TYPE_MAX)
-        {
-            Log.e(TAG, "Grade-Type ERROR !!! < " + type + " >");
-            return null;
-        }
-        String ret = "";
-        byte[] data = GD.GetGrade(type);
-        if(null != data)
-        {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < data.length; i++) {
-                sb.append("" + data[i]);
-            }
-            Log.v(TAG, "getGrade [ " + sb.toString() + " ]");
-            _notifyUI("[[GRADE]][ " + type + " ][ " + sb.toString() + " ]");
-            return sb.toString();
-        }
-        else{
-            Log.e(TAG, "getGrade [ null ]");
-            _notifyUI("[[GRADE]][ " + type + " ][ NULL ]");
-            return null;
-        }
-    }
-
     protected void finalize() throws java.lang.Throwable {
         super.finalize();
         closeSerialPort();
+        mInputStream = null;
+        mOutputStream = null;
         mSerialPort = null;
     }
 
