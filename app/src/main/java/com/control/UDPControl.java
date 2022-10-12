@@ -90,7 +90,7 @@ public final class UDPControl {
 
             sLocal_IP = _getIpAdd();
             Log.v(TAG, "Local IP : [ " + sLocal_IP + " ]");
-            _notifyUI("Local IP : [ " + sLocal_IP + " ]");
+            _notifyUI(ControllerActivity.MSG_UDP_INFO,"Local IP : [ " + sLocal_IP + " ]");
 
         } catch (Exception e) {
             Log.e(TAG, "Create Socket failed!!!");
@@ -102,10 +102,10 @@ public final class UDPControl {
         _findClient();
     }
 
-    private void _notifyUI(String info){
+    private void _notifyUI(int type,String info){
         if(mHandler != null){
             Message m = mHandler.obtainMessage();
-            m.what = ControllerActivity.MSG_UDP_INFO;
+            m.what = type;
             m.obj = info;
             m.sendToTarget();
         }
@@ -142,10 +142,10 @@ public final class UDPControl {
                 if(IControl.bTestNewGetIpMethod){ //Test new function for get local ip.
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         try {
-                            _notifyUI("[[TFN]] HostIP : < " + IpUtils.getLocalIp4Address().get().getHostAddress() + " >");
-                            _notifyUI("[[TFN]] IP : < " + HexConverUtils.bytesToHex(IpUtils.getLocalIp4Address().get().getAddress())+ " >");
-                            _notifyUI("[[TFN]] HostName : < " + IpUtils.getLocalIp4Address().get().getHostName()+ " >");
-                            _notifyUI("[[TFN]] Canonical HostName : < " + IpUtils.getLocalIp4Address().get().getCanonicalHostName()+ " >");
+                            _notifyUI(ControllerActivity.MSG_UDP_INFO,"[[TFN]] HostIP : < " + IpUtils.getLocalIp4Address().get().getHostAddress() + " >");
+                            _notifyUI(ControllerActivity.MSG_UDP_INFO,"[[TFN]] IP : < " + HexConverUtils.bytesToHex(IpUtils.getLocalIp4Address().get().getAddress())+ " >");
+                            _notifyUI(ControllerActivity.MSG_UDP_INFO,"[[TFN]] HostName : < " + IpUtils.getLocalIp4Address().get().getHostName()+ " >");
+                            _notifyUI(ControllerActivity.MSG_UDP_INFO,"[[TFN]] Canonical HostName : < " + IpUtils.getLocalIp4Address().get().getCanonicalHostName()+ " >");
                         } catch (SocketException e) {
                             e.printStackTrace();
                         }
@@ -297,14 +297,15 @@ public final class UDPControl {
     private void _doCaseFindClinet(DatagramPacket dp){
         if(dp.getLength() != 2 || dp.getData()[1] != iHostID) {
             Log.v(TAG, "[UDP] FIND NO-MATCH:[ " + dp.getAddress().getHostAddress() + " ]");
-            _notifyUI("[[UDP]] FIND NO-MATCH:[ " + dp.getAddress().getHostAddress() + " ]");
+            _notifyUI(ControllerActivity.MSG_UDP_INFO,"[[UDP]] FIND NO-MATCH:[ " + dp.getAddress().getHostAddress() + " ]");
             return;
         }
 
         sClient_IP = dp.getAddress().getHostAddress();
         iStatus = STATUS_UDP_READY;
         Log.v(TAG, "[UDP] FIND CLIENT:[ " + sClient_IP + " ][ " + dp.getData()[1] + " ]");
-        _notifyUI("[[UDP]] FIND CLIENT:[ " + sClient_IP + " ][ " + dp.getData()[1] + " ]");
+        _notifyUI(ControllerActivity.MSG_UDP_INFO,"[[UDP]] FIND CLIENT:[ " + sClient_IP + " ][ " + dp.getData()[1] + " ]");
+        _notifyUI(ControllerActivity.MSG_UDP_READY,null);
 //        byte[] test2 ={0x06,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C};
 //        Send(test2);
 

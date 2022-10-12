@@ -32,6 +32,7 @@ public class ControllerActivity extends AppCompatActivity implements OnClickList
 
     public final static int MSG_STATUS_CHANGE = 1;
     public final static int MSG_UDP_INFO = 2;
+    public final static int MSG_UDP_READY = 3;
 
     @SuppressLint("HandlerLeak")
     private final Handler mHandler = new Handler() {
@@ -40,6 +41,14 @@ public class ControllerActivity extends AppCompatActivity implements OnClickList
                 case MSG_STATUS_CHANGE:
                 case MSG_UDP_INFO:
                     refreshLogView((String)msg.obj);
+                    break;
+                case MSG_UDP_READY:
+                    findViewById(R.id.btn2).setEnabled(true);
+                    findViewById(R.id.btn3).setEnabled(true);
+                    findViewById(R.id.btn4).setEnabled(true);
+                    findViewById(R.id.btn5).setEnabled(true);
+                    findViewById(R.id.btn6).setEnabled(true);
+                    findViewById(R.id.btn7).setEnabled(true);
                     break;
             }
             super.handleMessage(msg);
@@ -61,6 +70,14 @@ public class ControllerActivity extends AppCompatActivity implements OnClickList
         findViewById(R.id.btn5).setOnClickListener(this);
         findViewById(R.id.btn6).setOnClickListener(this);
         findViewById(R.id.btn7).setOnClickListener(this);
+
+        findViewById(R.id.btn2).setEnabled(false);
+        findViewById(R.id.btn3).setEnabled(false);
+        findViewById(R.id.btn4).setEnabled(false);
+        findViewById(R.id.btn5).setEnabled(false);
+        findViewById(R.id.btn6).setEnabled(false);
+        findViewById(R.id.btn7).setEnabled(false);
+
         txtMsg.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         CR = ControlImpl.getInstance(_getConfig());
