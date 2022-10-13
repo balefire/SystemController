@@ -179,6 +179,12 @@ public final class ControlImpl implements IControl {
             size = mInputStream.read(buffer);
             Log.i(TAG, "REV LOOP SIZE:[ " + size + " ]");
 
+            if(size != len && size > 0) {
+                _notifyUI("< REV ERROR > Unknown Code:< " + HexConverUtils.bytesToHex(buffer, 0, size) + " >");
+                count = 0;
+                continue;
+            }
+
             if (size > 0) {
                 Log.i(TAG, "REV COUNT[ " +count + " ] SIZE[ " + size + " ][ " + HexConverUtils.bytesToHex(buffer, 0, size) + " ]");
                 System.arraycopy(buffer,0, result, count, size);
