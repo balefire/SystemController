@@ -18,8 +18,6 @@ public interface IControl {
     //Grade configuration.
     int GRADE_TYPE_0 = 0;                   //Get grade for [Rise and fall]
     int GRADE_TYPE_1 = 1;                   //Get grade for [Firefighting]
-    int GRADE_TYPE_MIN = GRADE_TYPE_0;
-    int GRADE_TYPE_MAX = GRADE_TYPE_1;
     int GRADE_0_MAX_LEN = 13;               //Grade size + 1 (First byte is Effective-Set)
     int GRADE_1_MAX_LEN = 4;                //Grade size + 1 (First byte is Effective-Set)
 
@@ -28,4 +26,7 @@ public interface IControl {
     //Just for test UDP client commands, DON'T used.
     void testForUDPClient(int iCMD);        //Test function for send command to UDP client directly.
 
+    //DB Item limited.
+    int DB_ITEM_MIN = GRADE_TYPE_0;
+    int DB_ITEM_MAX = GRADE_TYPE_1;
 }

@@ -42,7 +42,7 @@ public final class UDPControl {
     private String sLocal_IP = null;
     private String sClient_IP = null;
     private BlockingQueue<PacketData> blockingQueue = new LinkedBlockingDeque<PacketData>();
-    private GradeData gd = GradeData.getInstance();
+    private DataBase gd = DataBase.getInstance();
 
 
     private final static int STATUS_NO_CLIENT = 0;
@@ -277,11 +277,11 @@ public final class UDPControl {
                             break;
                         }
                         case 6:{
-                            gd.SetGrade(IControl.GRADE_TYPE_0, pack.getData(), 1);
+                            gd.SetData(IControl.GRADE_TYPE_0, pack.getData(), 1);
                             break;
                         }
                         case 7:{
-                            gd.SetGrade(IControl.GRADE_TYPE_1, pack.getData(), 1);
+                            gd.SetData(IControl.GRADE_TYPE_1, pack.getData(), 1);
                             break;
                         }
                         default: {

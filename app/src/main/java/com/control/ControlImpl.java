@@ -19,7 +19,7 @@ public final class ControlImpl implements IControl {
 
     private static IControl instance = null;
     private static UDPControl UC = null;
-    private GradeData GD = GradeData.getInstance();
+    private DataBase GD = DataBase.getInstance();
     private Handler mhandler = null;
 
     private static SerialPort mSerialPort;
@@ -216,13 +216,13 @@ public final class ControlImpl implements IControl {
 
     public String getGrade(int iGradeType)
     {
-        if(iGradeType < GRADE_TYPE_MIN || iGradeType > GRADE_TYPE_MAX)
+        if(iGradeType < DB_ITEM_MIN || iGradeType > DB_ITEM_MAX)
         {
             Log.e(TAG, "Grade-Type ERROR !!! < " + iGradeType + " >");
             return null;
         }
 
-        byte[] data = GD.GetGrade(iGradeType);
+        byte[] data = GD.GetData(iGradeType);
 
         if(null != data)
         {
