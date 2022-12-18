@@ -20,6 +20,7 @@ public final class ControlImpl implements IControl {
     private static IControl instance = null;
     private static UDPControl UC = null;
     private DataBase GD = DataBase.getInstance();
+    private int[] GDItemID = new int[GRADE_ITEM_MAX + 1];
     private Handler mhandler = null;
 
     private static SerialPort mSerialPort;
@@ -72,6 +73,10 @@ public final class ControlImpl implements IControl {
         } catch (InvalidParameterException e) {
             Log.e(TAG, "Init Serial ERROR: InvalidParameterException");
         }
+
+        //Init Grade data base
+        GDItemID[GRADE_TYPE_0] = GD.AddNewDataItem(GRADE_0_MAX_LEN);
+        GDItemID[GRADE_TYPE_1] = GD.AddNewDataItem(GRADE_1_MAX_LEN);
 
         if(bUseMonitorApp){
             mhandler = ControlApp.getInstance().getHandler();
@@ -216,13 +221,13 @@ public final class ControlImpl implements IControl {
 
     public String getGrade(int iGradeType)
     {
-        if(iGradeType < DB_ITEM_MIN || iGradeType > DB_ITEM_MAX)
+        if(iGradeType < GRADE_ITEM_MIN || iGradeType > GRADE_ITEM_MAX)
         {
             Log.e(TAG, "Grade-Type ERROR !!! < " + iGradeType + " >");
             return null;
         }
 
-        byte[] data = GD.GetData(iGradeType);
+        byte[] data = GD.GetData(GDItemID[iGradeType]);
 
         if(null != data)
         {
