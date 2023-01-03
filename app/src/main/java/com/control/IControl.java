@@ -15,6 +15,10 @@ public interface IControl {
     String CFG_ITEM_HOSTID = "HostID";      //Key name for host id in config file.
     String CFG_FILE_NAME = "Setting";       //File name for config file.
 
+    //Component control
+    boolean bModuleEnabled_Grade = true;     //Grade system enabled/disabled.
+    boolean bModuleEnable_HighVol = false;   //High Voltage system enabled/disabled.
+
     //Grade configuration.
     int GRADE_TYPE_0 = 0;                   //Get grade for [Rise and fall]
     int GRADE_TYPE_1 = 1;                   //Get grade for [Firefighting]
@@ -23,7 +27,7 @@ public interface IControl {
     int GRADE_0_MAX_LEN = 13;               //Grade size + 1 (First byte is Effective-Set)
     int GRADE_1_MAX_LEN = 4;                //Grade size + 1 (First byte is Effective-Set)
 
-    String getGrade(int iGradeType);              //Get examination grade information.
+    String getGrade(int iGradeType);        //Get examination grade information.
 
     //Just for test UDP client commands, DON'T used.
     void testForUDPClient(int iCMD);        //Test function for send command to UDP client directly.

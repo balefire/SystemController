@@ -51,7 +51,9 @@ public final class ControlImpl implements IControl {
 
     public static synchronized IControl getInstance(byte bId){
         if(null == instance) {
-            UC = UDPControl.getInstance(bId);
+            if(bModuleEnabled_Grade) {
+                UC = UDPControl.getInstance(bId);
+            }
             instance = new ControlImpl();
         }
 
@@ -74,16 +76,18 @@ public final class ControlImpl implements IControl {
             Log.e(TAG, "Init Serial ERROR: InvalidParameterException");
         }
 
-        //Init Grade data base
-        GDItemID[GRADE_TYPE_0] = GD.AddNewDataItem(GRADE_0_MAX_LEN);
-        GDItemID[GRADE_TYPE_1] = GD.AddNewDataItem(GRADE_1_MAX_LEN);
-
         if(bUseMonitorApp){
             mhandler = ControlApp.getInstance().getHandler();
         }
 
-        //Start Rev thread.
-        _doReceive();
+        if(bModuleEnabled_Grade) {
+            //Init Grade data base
+            GDItemID[GRADE_TYPE_0] = GD.AddNewDataItem(GRADE_0_MAX_LEN);
+            GDItemID[GRADE_TYPE_1] = GD.AddNewDataItem(GRADE_1_MAX_LEN);
+
+            //Start Rev thread.
+            _doReceive();
+        }
     }
 
     private void _setStatus(int iNewStatus){

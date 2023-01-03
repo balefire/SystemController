@@ -273,7 +273,7 @@ public final class UDPControl {
 
                     switch(pack.getData()[0]) {
                         case 0:{
-                            _doCaseFindClinet(pack);
+                            _doCaseFindClient(pack);
                             break;
                         }
                         case 6:{
@@ -294,7 +294,7 @@ public final class UDPControl {
         }).start();
     }
 
-    private void _doCaseFindClinet(DatagramPacket dp){
+    private void _doCaseFindClient(DatagramPacket dp){
         if(dp.getLength() != 2 || dp.getData()[1] != iHostID) {
             Log.v(TAG, "[UDP] FIND NO-MATCH:[ " + dp.getAddress().getHostAddress() + " ]");
             _notifyUI(ControllerActivity.MSG_UDP_INFO,"[[UDP]] FIND NO-MATCH:[ " + dp.getAddress().getHostAddress() + " ]");
